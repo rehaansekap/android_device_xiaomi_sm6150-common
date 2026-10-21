@@ -33,4 +33,10 @@
     <!-- Doze Help Dialog -->
     <string name="doze_settings_help_title">Help</string>
     <string name="doze_settings_help_text">These features use sensor events to launch a doze notification pulse. The chosen sensor is only enabled when the device receives a notification, this helps to reduce battery usage. There is also an option to enable the chosen sensor as soon as the screen turns off, this will cause higher battery usage.</string>
+    <!-- Doze Brightness -->
+    <string name="doze_brightness_title">Doze brightness</string>
+    <string name="doze_brightness_summary">Set screen brightness for doze</string>
+    <string name="doze_brightness_low">Low</string>
+    <string name="doze_brightness_high">High</string>
+    <string name="doze_brightness_adaptive">Adaptive</string>
 </resources>

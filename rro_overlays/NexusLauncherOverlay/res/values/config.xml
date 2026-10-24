@@ -14,5 +14,7 @@
      limitations under the License.
 -->
 <resources>
-    <dimen name="max_depth_blur_radius_enhanced">15dp</dimen>
+    <!-- Disable heavy Skia Gaussian workspace blur on Adreno 618 to eliminate App Drawer stutter and frame drops -->
+    <dimen name="max_depth_blur_radius_enhanced">0dp</dimen>
+    <bool name="reduce_workspace_blur_usage">true</bool>
 </resources>

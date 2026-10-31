@@ -290,15 +290,10 @@ PRODUCT_COPY_FILES += \
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
-    bootable/deprecated-ota \
-    hardware/google/interfaces \
-    hardware/google/pixel/pixelstats \
-    hardware/google/pixel/power-libperfmgr \
-    hardware/lineage/interfaces/power-libperfmgr \
-    hardware/bliss/interfaces/power-libperfmgr \
-    hardware/qcom-caf/common/libqti-perfd-client \
-    hardware/xiaomi \
-    vendor/qcom/opensource/usb/etc
+    hardware/qcom/wlan/qcwcn/wpa_supplicant_8_lib \
+    vendor/qcom/opensource/commonsys-intf/display \
+    vendor/qcom/opensource/display \
+    hardware/xiaomi
 
 # Telephony
 PRODUCT_PACKAGES += \

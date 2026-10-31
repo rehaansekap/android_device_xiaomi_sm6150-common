@@ -5,3 +5,8 @@ attribute vendor_hal_powerstateservice_server;
 attribute vendor_hal_powerstateutility;
 attribute vendor_hal_powerstateutility_client;
 attribute vendor_hal_powerstateutility_server;
+
+type vendor_hal_neuralnetworks_default, domain;
+hal_server_domain(vendor_hal_neuralnetworks_default, hal_neuralnetworks)
+
+type vendor_hal_iop_hwservice, hwservice_manager_type, protected_hwservice;

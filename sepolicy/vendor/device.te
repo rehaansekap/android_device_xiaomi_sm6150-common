@@ -1,3 +1,8 @@
 # Block devices
 typeattribute system_block_device super_block_device_type;
 
+# IR / LIRC
+type lirc_device, dev_type;
+allow hal_ir_default lirc_device:chr_file rw_file_perms;
+
+

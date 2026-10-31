@@ -127,6 +127,7 @@ TARGET_BOARD_KERNEL_HEADERS := device/xiaomi/sm6150-common/kernel-headers
 TARGET_BOARD_PLATFORM := sm6150
 
 # Properties
+BUILD_BROKEN_DUP_SYSPROP := true
 TARGET_ODM_PROP += $(COMMON_PATH)/odm.prop
 TARGET_PRODUCT_PROP += $(COMMON_PATH)/product.prop
 TARGET_SYSTEM_PROP += $(COMMON_PATH)/system.prop

@@ -166,12 +166,14 @@ SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/public
 BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
 
 # Soong
-SOONG_CONFIG_NAMESPACES += xiaomiSm6150Vars
+SOONG_CONFIG_NAMESPACES += xiaomiSm6150Vars tinycompress
 SOONG_CONFIG_xiaomiSm6150Vars += \
     livedisplay_support_anti_flicker \
     livedisplay_support_sunlight_enhancement
 SOONG_CONFIG_xiaomiSm6150Vars_livedisplay_support_anti_flicker ?= true
 SOONG_CONFIG_xiaomiSm6150Vars_livedisplay_support_sunlight_enhancement ?= true
+SOONG_CONFIG_tinycompress += enable_extended_compress_format
+SOONG_CONFIG_tinycompress_enable_extended_compress_format := true
 
 # Verified Boot
 BOARD_AVB_ENABLE := true

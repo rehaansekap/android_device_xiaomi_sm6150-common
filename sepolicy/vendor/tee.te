@@ -2,4 +2,17 @@ allow tee fingerprint_data_file:dir create_dir_perms;
 allow tee fingerprint_data_file:file create_file_perms;
 allow tee mnt_vendor_file:dir rw_dir_perms;
 allow tee mnt_vendor_file:file create_file_perms;
-allow tee ion_device:chr_file rw_file_perms;
+
+# Hardware HALs access to ION memory
+allow {
+    tee
+    hal_keymaster
+    vendor_hal_keymaster_qti
+    hal_gatekeeper
+    vendor_hal_gatekeeper_qti
+    hal_camera
+    hal_fingerprint
+    hal_audio
+    hal_graphics_allocator
+    hal_graphics_composer
+} ion_device:chr_file rw_file_perms;

@@ -300,6 +300,7 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/xiaomi \
     hardware/qcom/wlan \
     hardware/qcom-caf/wlan \
+    hardware/qcom-caf/wlan/qcwcn \
     vendor/qcom/opensource/usb/etc
 
 # Telephony

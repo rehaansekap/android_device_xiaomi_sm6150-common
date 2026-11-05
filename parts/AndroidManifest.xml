@@ -22,6 +22,7 @@
     <uses-permission android:name="android.permission.DEVICE_POWER" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.REBOOT" />
 
     <protected-broadcast android:name="com.android.systemui.doze.pulse" />
 
@@ -78,6 +79,25 @@
             android:name=".thermal.ThermalService"
             android:permission="ThermalService">
         </service>
+
+        <activity
+            android:name=".zram.ZramSettingsActivity"
+            android:exported="true"
+            android:label="@string/zram_title"
+            android:icon="@drawable/ic_memory">
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
+            <meta-data
+                android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.system" />
+            <meta-data
+                android:name="com.android.settings.summary"
+                android:resource="@string/zram_summary" />
+            <meta-data
+                android:name="com.android.settings.icon"
+                android:resource="@drawable/ic_memory" />
+        </activity>
 
     </application>
 </manifest>

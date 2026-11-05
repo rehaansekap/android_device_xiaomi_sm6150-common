@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Memory Extension (ZRAM) -->
+    <string name="zram_title">Ekstensi Memori (ZRAM)</string>
+    <string name="zram_summary">Atur memori swap virtual dan kompresi ZRAM</string>
+    <string name="zram_enable_title">Aktifkan Ekstensi Memori</string>
+    <string name="zram_current_status_title">Status Swap Aktif</string>
+    <string name="zram_current_status_summary">%1$s MB (%2$s GB) dialokasikan di kernel saat ini</string>
+    <string name="zram_current_status_disabled">Ekstensi memori dinonaktifkan (0 MB)</string>
+    <string name="zram_config_category_title">Konfigurasi</string>
+    <string name="zram_slider_title">Preset Cepat (GB)</string>
+    <string name="zram_slider_summary">Pilih dari 1 GB hingga batas RAM fisik</string>
+    <string name="zram_custom_title">Ukuran Kustom (MB)</string>
+    <string name="zram_custom_summary">Tentukan alokasi swap mandiri dalam satuan megabita</string>
+    <string name="zram_custom_dialog_title">Masukkan ukuran dalam MB (512 - %1$s MB)</string>
+    <string name="zram_custom_invalid">Nilai harus berada di antara 512 MB dan %1$s MB</string>
+    <string name="zram_footer_text">Ekstensi Memori (ZRAM) membuat ruang RAM virtual terkompresi di dalam RAM fisik agar lebih banyak aplikasi dapat bertahan di latar belakang. Perubahan akan berlaku setelah perangkat dimuat ulang.</string>
+    <string name="zram_reboot_dialog_title">Perlu memuat ulang perangkat</string>
+    <string name="zram_reboot_dialog_message">Perubahan pada Ekstensi Memori akan berlaku setelah Anda memulai ulang perangkat.</string>
+    <string name="zram_reboot_now">Mulai ulang sekarang</string>
+    <string name="zram_reboot_later">Nanti</string>
+</resources>

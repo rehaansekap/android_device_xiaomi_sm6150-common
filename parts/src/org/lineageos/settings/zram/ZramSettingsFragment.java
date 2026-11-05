@@ -10,7 +10,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.text.InputType;
-import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.EditTextPreference;
@@ -53,9 +52,10 @@ public class ZramSettingsFragment extends SettingsBasePreferenceFragment
         mCustomMbPref = findPreference(KEY_CUSTOM_MB);
 
         int activeMb = ZramUtils.getActiveZramMb();
-        int configuredMb = ZramUtils.getConfiguredZramMb();
+        int configuredMb = ZramUtils.getConfiguredZramMb(getContext());
+        
+        // If user explicitly configured, use it. Otherwise, use active swap from /proc/meminfo.
         int currentEffectiveMb = (configuredMb >= 0) ? configuredMb : activeMb;
-
         boolean isEnabled = (configuredMb != 0);
 
         mMasterSwitch.setChecked(isEnabled);
@@ -63,18 +63,21 @@ public class ZramSettingsFragment extends SettingsBasePreferenceFragment
 
         updateStatus(activeMb);
 
+        int displayMb = (currentEffectiveMb > 0) ? currentEffectiveMb : (mTotalRamGb / 2) * 1024;
+        int initialGb = Math.min(mTotalRamGb, Math.max(1, (int) Math.round((double) displayMb / 1024.0)));
+
         if (mSliderPref != null) {
             mSliderPref.setMin(1);
             mSliderPref.setMax(mTotalRamGb);
-            int initialGb = Math.min(mTotalRamGb, Math.max(1, (int) Math.round((double) currentEffectiveMb / 1024.0)));
             mSliderPref.setValue(initialGb);
             mSliderPref.setOnPreferenceChangeListener(this);
         }
 
         if (mCustomMbPref != null) {
             mCustomMbPref.setDialogTitle(getString(R.string.zram_custom_dialog_title, String.valueOf(mTotalRamMb)));
-            mCustomMbPref.setText(String.valueOf(currentEffectiveMb));
-            mCustomMbPref.setSummary(currentEffectiveMb + " MB");
+            int customDisplay = isEnabled ? displayMb : 0;
+            mCustomMbPref.setText(String.valueOf(customDisplay));
+            mCustomMbPref.setSummary(customDisplay + " MB");
             mCustomMbPref.setOnBindEditTextListener(editText -> {
                 editText.setInputType(InputType.TYPE_CLASS_NUMBER);
                 editText.setSelection(editText.getText().length());
@@ -111,14 +114,24 @@ public class ZramSettingsFragment extends SettingsBasePreferenceFragment
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        Context context = getContext();
         if (preference == mMasterSwitch) {
             boolean enabled = (Boolean) newValue;
             updateEnabledState(enabled);
             if (!enabled) {
-                ZramUtils.setConfiguredZramMb(0);
+                ZramUtils.setConfiguredZramMb(context, 0);
+                if (mCustomMbPref != null) {
+                    mCustomMbPref.setText("0");
+                    mCustomMbPref.setSummary("0 MB");
+                }
             } else {
                 int gb = (mSliderPref != null) ? mSliderPref.getValue() : (mTotalRamGb / 2);
-                ZramUtils.setConfiguredZramMb(gb * 1024);
+                int mb = gb * 1024;
+                ZramUtils.setConfiguredZramMb(context, mb);
+                if (mCustomMbPref != null) {
+                    mCustomMbPref.setText(String.valueOf(mb));
+                    mCustomMbPref.setSummary(mb + " MB");
+                }
             }
             showRebootDialog();
             return true;
@@ -129,7 +142,7 @@ public class ZramSettingsFragment extends SettingsBasePreferenceFragment
                 mCustomMbPref.setText(String.valueOf(mb));
                 mCustomMbPref.setSummary(mb + " MB");
             }
-            ZramUtils.setConfiguredZramMb(mb);
+            ZramUtils.setConfiguredZramMb(context, mb);
             showRebootDialog();
             return true;
         } else if (preference == mCustomMbPref) {
@@ -137,7 +150,7 @@ public class ZramSettingsFragment extends SettingsBasePreferenceFragment
             try {
                 int mb = Integer.parseInt(str.trim());
                 if (mb < 512 || mb > mTotalRamMb) {
-                    Toast.makeText(getContext(),
+                    Toast.makeText(context,
                             getString(R.string.zram_custom_invalid, String.valueOf(mTotalRamMb)),
                             Toast.LENGTH_LONG).show();
                     return false;
@@ -147,11 +160,11 @@ public class ZramSettingsFragment extends SettingsBasePreferenceFragment
                     int gb = Math.min(mTotalRamGb, Math.max(1, (int) Math.round((double) mb / 1024.0)));
                     mSliderPref.setValue(gb);
                 }
-                ZramUtils.setConfiguredZramMb(mb);
+                ZramUtils.setConfiguredZramMb(context, mb);
                 showRebootDialog();
                 return true;
             } catch (NumberFormatException e) {
-                Toast.makeText(getContext(),
+                Toast.makeText(context,
                         getString(R.string.zram_custom_invalid, String.valueOf(mTotalRamMb)),
                         Toast.LENGTH_LONG).show();
                 return false;

@@ -150,6 +150,7 @@ on property:sys.boot_completed=1
 
     # Enable ZRAM on boot_complete
     swapon_all /vendor/etc/fstab.zram
+    start vendor.zram_setup
 
     # Runtime fs tuning
     write /sys/block/sda/queue/read_ahead_kb 128
@@ -158,6 +159,13 @@ on property:sys.boot_completed=1
     write /sys/block/sde/queue/read_ahead_kb 128
     write /sys/block/sde/queue/nr_requests 128
     write /sys/block/sde/queue/iostats 1
+
+service vendor.zram_setup /vendor/bin/init.zram.sh
+    class late_start
+    user root
+    group root system
+    disabled
+    oneshot
 
 service vendor.pd_mapper /vendor/bin/pd-mapper
     class core

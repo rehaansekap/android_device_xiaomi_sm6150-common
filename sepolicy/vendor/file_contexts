@@ -61,6 +61,3 @@
 # Xiaomi thermal daemon
 /vendor/bin/mi_thermald                                              u:object_r:mi_thermald_exec:s0
 /data/vendor/thermal(/.*)?                                           u:object_r:thermal_data_file:s0
-
-# ZRAM setup
-/vendor/bin/init\.zram\.sh                                           u:object_r:vendor_qti_init_shell_exec:s0

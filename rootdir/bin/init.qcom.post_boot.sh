@@ -337,11 +337,6 @@ esac
     echo 0 > /proc/sys/vm/oom_dump_tasks
     echo 0 > /proc/sys/vm/page-cluster
 
-    # Setup custom ZRAM if configured
-    if [ -x /vendor/bin/init.zram.sh ]; then
-        /vendor/bin/init.zram.sh
-    fi
-
 # Enable PowerHAL hint processing
 setprop vendor.powerhal.init 1
 

@@ -28,7 +28,6 @@ SWAPON=/vendor/bin/swapon
 # If 0, disable zram swap completely
 if [ "$zram_mb" -eq 0 ]; then
     $SWAPOFF /dev/block/zram0 2>/dev/null
-    sleep 1
     echo 1 > /sys/block/zram0/reset 2>/dev/null
     exit 0
 fi
@@ -42,7 +41,6 @@ if [ "$cur_bytes" = "$req_bytes" ]; then
 fi
 
 $SWAPOFF /dev/block/zram0 2>/dev/null
-sleep 1
 echo 1 > /sys/block/zram0/reset 2>/dev/null
 echo zstd > /sys/block/zram0/comp_algorithm 2>/dev/null
 echo 1 > /sys/block/zram0/use_dedup 2>/dev/null

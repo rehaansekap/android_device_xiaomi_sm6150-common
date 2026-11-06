@@ -39,24 +39,4 @@
     <string name="doze_brightness_low">Low</string>
     <string name="doze_brightness_high">High</string>
     <string name="doze_brightness_adaptive">Adaptive</string>
-
-    <!-- Memory Extension (ZRAM) -->
-    <string name="zram_title">Memory Extension (ZRAM)</string>
-    <string name="zram_summary">Configure virtual swap memory and compression size</string>
-    <string name="zram_enable_title">Enable Memory Extension</string>
-    <string name="zram_current_status_title">Active Swap Status</string>
-    <string name="zram_current_status_summary">%1$s MB (%2$s GB) currently allocated in kernel</string>
-    <string name="zram_current_status_disabled">Memory Extension is currently disabled (0 MB)</string>
-    <string name="zram_config_category_title">Configuration</string>
-    <string name="zram_slider_title">Fast Preset (GB)</string>
-    <string name="zram_slider_summary">Select from 1 GB up to physical RAM size</string>
-    <string name="zram_custom_title">Custom Size (MB)</string>
-    <string name="zram_custom_summary">Set a custom swap allocation in megabytes</string>
-    <string name="zram_custom_dialog_title">Enter size in MB (512 - %1$s MB)</string>
-    <string name="zram_custom_invalid">Value must be between 512 MB and %1$s MB</string>
-    <string name="zram_footer_text">Memory Extension (ZRAM) creates compressed virtual RAM inside physical memory to keep more apps in the background. Changes will take effect after a reboot.</string>
-    <string name="zram_reboot_dialog_title">Reboot required</string>
-    <string name="zram_reboot_dialog_message">Changes to Memory Extension will take effect after you restart your device.</string>
-    <string name="zram_reboot_now">Restart now</string>
-    <string name="zram_reboot_later">Later</string>
 </resources>

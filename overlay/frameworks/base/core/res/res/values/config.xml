@@ -274,4 +274,8 @@
     <bool name="config_deviceSupportsHighPerfTransitions">false</bool>
    <!-- Auto Select Network UI -->
    <bool name="config_enableNewAutoSelectNetworkUI">true</bool>
+
+    <!-- Disable app launch blur and surface blur expansion by default -->
+    <bool name="config_enableAppLaunchBlur">false</bool>
+    <bool name="config_enableBlurExpansion">false</bool>
 </resources>

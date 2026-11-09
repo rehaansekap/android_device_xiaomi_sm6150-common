@@ -33,10 +33,10 @@ import android.widget.SectionIndexer;
 import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.settingslib.applications.ApplicationsState;
-import com.android.settingslib.widget.SettingsBasePreferenceFragment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -45,7 +45,7 @@ import java.util.Map;
 import org.lineageos.settings.R;
 
 public class ThermalSettingsFragment
-        extends SettingsBasePreferenceFragment implements ApplicationsState.Callbacks {
+        extends PreferenceFragmentCompat implements ApplicationsState.Callbacks {
     private AllPackagesAdapter mAllPackagesAdapter;
     private ApplicationsState mApplicationsState;
     private ApplicationsState.Session mSession;

@@ -159,6 +159,8 @@ TARGET_RELEASETOOLS_EXTENSIONS := $(COMMON_PATH)
 
 # Sepolicy
 TARGET_SEPOLICY_DIR := msmsteppe
+# LineageOS common sepolicy (te_macros, hal_lineage_* attributes, dynamic/vendor rules)
+-include device/lineage/sepolicy/common/sepolicy.mk
 -include device/lineage/sepolicy/libion/sepolicy.mk
 -include device/lineage/sepolicy/libperfmgr/sepolicy.mk
 -include device/bliss/sepolicy/libion/sepolicy.mk

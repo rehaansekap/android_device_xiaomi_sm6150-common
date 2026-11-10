@@ -303,7 +303,7 @@ service vendor.audio-hal /vendor/bin/hw/android.hardware.audio.service
     socket audio_hw_socket seqpacket 0666 system system
     onrestart restart audioserver
 
-service boot_logger /system/bin/logcat -b all -f /cache/boot_logcat.txt -v threadtime
+service boot_logger /vendor/bin/sh /vendor/bin/boot_logger.sh
     class core
     user root
     group root system

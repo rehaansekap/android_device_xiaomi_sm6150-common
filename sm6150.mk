@@ -112,12 +112,14 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.4-service \
     android.hardware.graphics.mapper@3.0-impl-qti-display \
     android.hardware.graphics.mapper@4.0-impl-qti-display \
-    vendor.qti.hardware.display.allocator-service \
-    vendor.qti.hardware.memtrack-service
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.memtrack@1.0-service \
+    vendor.qti.hardware.display.allocator-service
 
 PRODUCT_PACKAGES += \
     gralloc.sm6150 \
     hwcomposer.sm6150 \
+    memtrack.sm6150 \
     libqdMetaData \
     vendor.display.config@2.0
 
@@ -126,11 +128,12 @@ PRODUCT_COPY_FILES += \
 
 # DRM
 PRODUCT_PACKAGES += \
-    android.hardware.drm-service.clearkey
+    android.hardware.drm-service.clearkey \
+    libcrypto_shim
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint-service.xiaomi
+    android.hardware.biometrics.fingerprint@2.3-service.xiaomi
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
@@ -255,8 +258,14 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power-service.lineage-libperfmgr \
+    android.hardware.power-service.xiaomi-libperfmgr \
     libqti-perfd-client
+
+# QTI Service Locator & Compatibility Libraries
+PRODUCT_PACKAGES += \
+    libjson \
+    libwfdaac_vendor \
+    libwpa_client
 
 # QTI
 PRODUCT_COPY_FILES += \
@@ -302,6 +311,7 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/qcom/wlan \
     hardware/qcom-caf/wlan \
     hardware/qcom-caf/wlan/qcwcn \
+    vendor/nxp/nfc \
     vendor/qcom/opensource/usb/etc
 
 # Telephony
@@ -346,9 +356,8 @@ PRODUCT_COPY_FILES += \
 
 # USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.3-service.dual_role_usb \
-    android.hardware.usb.gadget-service.qti \
-    usb_compositions.conf
+    android.hardware.usb@1.3-service-qti \
+    android.hardware.usb.gadget@1.0-service-qti
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.accessory.xml \

@@ -1,0 +1,12 @@
+//
+// Copyright (C) 2024 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_library_shared {
+    name: "libcrypto_shim",
+    srcs: ["cbs.c"],
+    compile_multilib: "both",
+    vendor: true,
+}

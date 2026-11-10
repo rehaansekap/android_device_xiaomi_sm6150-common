@@ -75,4 +75,67 @@ $(FIRMWARE_MOUNTPOINTS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(FIRMWARE_MOUNTPOINTS)
 
+# RFS symlinks
+RFS_SYMLINK_DIRS := \
+    apq/gnss \
+    mdm/adsp mdm/cdsp mdm/mpss mdm/ois mdm/slpi mdm/tn mdm/wpss \
+    msm/adsp msm/cdsp msm/mpss msm/ois msm/slpi msm/wpss
+
+define add-rfs-symlinks
+RFS_$(1)_SYMLINKS := \
+    $(TARGET_OUT_VENDOR)/rfs/$(1)/readwrite \
+    $(TARGET_OUT_VENDOR)/rfs/$(1)/shared \
+    $(TARGET_OUT_VENDOR)/rfs/$(1)/hlos \
+    $(TARGET_OUT_VENDOR)/rfs/$(1)/ramdumps \
+    $(TARGET_OUT_VENDOR)/rfs/$(1)/readonly/firmware \
+    $(TARGET_OUT_VENDOR)/rfs/$(1)/readonly/vendor/firmware
+
+$(TARGET_OUT_VENDOR)/rfs/$(1)/readwrite: $(LOCAL_INSTALLED_MODULE)
+	@mkdir -p $$(dir $$@)
+	@rm -rf $$@
+	$$(hide) ln -sf /mnt/vendor/persist/rfs/$(1) $$@
+
+$(TARGET_OUT_VENDOR)/rfs/$(1)/shared: $(LOCAL_INSTALLED_MODULE)
+	@mkdir -p $$(dir $$@)
+	@rm -rf $$@
+	$$(hide) ln -sf /mnt/vendor/persist/rfs/shared $$@
+
+$(TARGET_OUT_VENDOR)/rfs/$(1)/hlos: $(LOCAL_INSTALLED_MODULE)
+	@mkdir -p $$(dir $$@)
+	@rm -rf $$@
+	$$(hide) ln -sf /mnt/vendor/persist/hlos_rfs/shared $$@
+
+$(TARGET_OUT_VENDOR)/rfs/$(1)/ramdumps: $(LOCAL_INSTALLED_MODULE)
+	@mkdir -p $$(dir $$@)
+	@rm -rf $$@
+	$$(hide) ln -sf /data/vendor/tombstones/rfs/$(2) $$@
+
+$(TARGET_OUT_VENDOR)/rfs/$(1)/readonly/firmware: $(LOCAL_INSTALLED_MODULE)
+	@mkdir -p $$(dir $$@)
+	@rm -rf $$@
+	$$(hide) ln -sf /vendor/firmware_mnt $$@
+
+$(TARGET_OUT_VENDOR)/rfs/$(1)/readonly/vendor/firmware: $(LOCAL_INSTALLED_MODULE)
+	@mkdir -p $$(dir $$@)
+	@rm -rf $$@
+	$$(hide) ln -sf /vendor/firmware $$@
+
+ALL_DEFAULT_INSTALLED_MODULES += $$(RFS_$(1)_SYMLINKS)
+endef
+
+$(eval $(call add-rfs-symlinks,apq/gnss,modem))
+$(eval $(call add-rfs-symlinks,mdm/adsp,lpass))
+$(eval $(call add-rfs-symlinks,mdm/cdsp,cdsp))
+$(eval $(call add-rfs-symlinks,mdm/mpss,modem))
+$(eval $(call add-rfs-symlinks,mdm/ois,ois))
+$(eval $(call add-rfs-symlinks,mdm/slpi,slpi))
+$(eval $(call add-rfs-symlinks,mdm/tn,tn))
+$(eval $(call add-rfs-symlinks,mdm/wpss,wpss))
+$(eval $(call add-rfs-symlinks,msm/adsp,lpass))
+$(eval $(call add-rfs-symlinks,msm/cdsp,cdsp))
+$(eval $(call add-rfs-symlinks,msm/mpss,modem))
+$(eval $(call add-rfs-symlinks,msm/ois,ois))
+$(eval $(call add-rfs-symlinks,msm/slpi,slpi))
+$(eval $(call add-rfs-symlinks,msm/wpss,wpss))
+
 endif

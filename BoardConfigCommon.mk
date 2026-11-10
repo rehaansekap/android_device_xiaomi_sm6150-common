@@ -15,6 +15,7 @@
 #
 
 COMMON_PATH := device/xiaomi/sm6150-common
+BOARD_VENDOR := xiaomi
 
 # Broken build flags for vendor blobs compatibility
 BUILD_BROKEN_DUP_RULES := true

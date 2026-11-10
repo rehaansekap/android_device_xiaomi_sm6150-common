@@ -246,10 +246,10 @@ DEVICE_PACKAGE_OVERLAYS += \
 PRODUCT_ENFORCE_RRO_TARGETS += *
 
 # Partitions
-PRODUCT_PACKAGES += \
-    vendor_bt_firmware_mountpoint \
-    vendor_dsp_mountpoint \
-    vendor_firmware_mnt_mountpoint
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/placeholder:$(TARGET_COPY_OUT_VENDOR)/firmware_mnt/.empty \
+    $(LOCAL_PATH)/configs/placeholder:$(TARGET_COPY_OUT_VENDOR)/bt_firmware/.empty \
+    $(LOCAL_PATH)/configs/placeholder:$(TARGET_COPY_OUT_VENDOR)/dsp/.empty
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
@@ -373,7 +373,7 @@ PRODUCT_COPY_FILES += \
 
 # WiFi
 PRODUCT_PACKAGES += \
-    android.hardware.wifi-service \
+    android.hardware.wifi@1.0-service \
     hostapd \
     ipacm \
     IPACM_cfg.xml \

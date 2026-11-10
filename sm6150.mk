@@ -116,8 +116,10 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.memtrack-service
 
 PRODUCT_PACKAGES += \
-    gralloc.qcom \
-    hwcomposer.qcom
+    gralloc.sm6150 \
+    hwcomposer.sm6150 \
+    libqdMetaData \
+    vendor.display.config@2.0
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml

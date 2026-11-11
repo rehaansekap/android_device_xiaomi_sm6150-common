@@ -209,6 +209,7 @@ on zygote-start && property:vendor.usb.use_ffs_mtp=1
    mount functionfs ptp /dev/usb-ffs/ptp rmode=0770,fmode=0660,uid=1024,gid=1024,no_disconnect=1
 
 on boot && property:vendor.usb.use_gadget_hal=1
+   chown system usb /sys/devices/platform/soc/${vendor.usb.device:-a600000.ssusb}/usb_data_enabled
    setprop sys.usb.controller ${vendor.usb.controller}
    setprop sys.usb.configfs 2
 

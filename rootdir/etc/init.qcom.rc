@@ -128,9 +128,6 @@ on boot
     enable vendor.dataqti
     enable vendor.dataadpl
 
-    # Early ADB for debugging
-    start adbd
-
 on post-fs-data
     # Create directory used by display clients
     mkdir /data/vendor/display 0770 system graphics
@@ -302,9 +299,3 @@ service vendor.audio-hal /vendor/bin/hw/android.hardware.audio.service
     task_profiles ProcessCapacityHigh HighPerformance
     socket audio_hw_socket seqpacket 0666 system system
     onrestart restart audioserver
-
-service boot_logger /vendor/bin/sh /vendor/bin/boot_logger.sh
-    class core
-    user root
-    group root system
-    oneshot

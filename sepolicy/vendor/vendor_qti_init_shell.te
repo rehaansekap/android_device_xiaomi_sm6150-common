@@ -1,2 +1,17 @@
 # To set powerhal init property
 set_prop(vendor_qti_init_shell, vendor_power_prop)
+
+# USB uvc configfs setup
+allow vendor_qti_init_shell configfs:dir create_dir_perms;
+allow vendor_qti_init_shell configfs:file create_file_perms;
+allow vendor_qti_init_shell configfs:lnk_file create_file_perms;
+
+# VM tuning in init.qcom.post_boot.sh
+allow vendor_qti_init_shell {
+    proc_dirty
+    proc_extra_free_kbytes
+    proc_overcommit_memory
+    proc_page_cluster
+    proc_swappiness
+    proc_watermark_scale_factor
+}:file rw_file_perms;

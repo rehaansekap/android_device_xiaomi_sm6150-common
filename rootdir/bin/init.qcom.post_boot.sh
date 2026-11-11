@@ -180,7 +180,7 @@ case "$soc_id" in
 
     # Enable idle state listener
     echo 1 > /sys/class/drm/card0/device/idle_encoder_mask
-    echo 100 > /sys/class/drm/card0/device/idle_timeout_ms
+    echo 0 > /sys/class/drm/card0/device/idle_timeout_ms
 
     # Turn on sleep modes.
     echo 0 > /sys/module/lpm_levels/parameters/sleep_disabled
@@ -294,7 +294,7 @@ case "$soc_id" in
 
     # Enable idle state listener
     echo 1 > /sys/class/drm/card0/device/idle_encoder_mask
-    echo 100 > /sys/class/drm/card0/device/idle_timeout_ms
+    echo 0 > /sys/class/drm/card0/device/idle_timeout_ms
 
     # Turn on sleep modes.
     echo 0 > /sys/module/lpm_levels/parameters/sleep_disabled

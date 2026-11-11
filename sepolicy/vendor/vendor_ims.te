@@ -1,0 +1,7 @@
+allow vendor_ims self:qipcrtr_socket create_socket_perms_no_ioctl;
+allow vendor_ims self:netlink_generic_socket create_socket_perms_no_ioctl;
+netmgr_socket(vendor_ims);
+set_prop(vendor_ims, vendor_ctl_vendor_imsrcsservice_prop)
+
+allow vendor_hal_imsrtp vendor_ims:unix_stream_socket connectto;
+allow vendor_ims_service vendor_ims:unix_stream_socket connectto;

@@ -1,0 +1,4 @@
+get_prop(hal_usb_default, vendor_usb_prop)
+allow hal_usb_default configfs:dir search;
+allow hal_usb_default configfs:file rw_file_perms;
+allow hal_usb_default sysfs:lnk_file r_file_perms;

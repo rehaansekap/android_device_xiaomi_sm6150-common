@@ -64,8 +64,11 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
 DEVICE_MANIFEST_FILE := $(COMMON_PATH)/configs/hidl/manifest.xml
 DEVICE_MANIFEST_FILE += \
     hardware/qcom-caf/sm8150/media/conf_files/sm6150/c2_manifest.xml \
-    hardware/dolby/vendor.dolby.hardware.dms@2.0-service.xml \
-    hardware/dolby/vendor.dolby.media.c2.xml
+    hardware/dolby/vendor.dolby.hardware.dms@2.0-service.xml
+# NOTE: hardware/dolby/vendor.dolby.media.c2.xml sengaja tidak dipakai.
+# Store codec2 Dolby mendaftar sebagai IComponentStore/default1 tanpa IConfigurable,
+# dan libcodec2_client A17 meng-abort() system_server saat enumerasi
+# ("Codec2 service default1 does not have IConfigurable").
 
 DEVICE_MATRIX_FILE := hardware/qcom-caf/common/compatibility_matrix.xml
 ODM_MANIFEST_FILES += $(COMMON_PATH)/configs/hidl/manifest-qva.xml

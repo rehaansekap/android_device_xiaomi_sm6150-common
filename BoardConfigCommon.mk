@@ -63,8 +63,11 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
 
 DEVICE_MANIFEST_FILE := $(COMMON_PATH)/configs/hidl/manifest.xml
 DEVICE_MANIFEST_FILE += \
-    hardware/qcom-caf/sm8150/media/conf_files/sm6150/c2_manifest.xml \
-    hardware/dolby/vendor.dolby.hardware.dms@2.0-service.xml
+    hardware/qcom-caf/sm8150/media/conf_files/sm6150/c2_manifest.xml
+# NOTE: vendor.dolby.hardware.dms@2.0-service.xml tidak lagi di sini.
+# hardware/dolby/Android.bp sudah menginstalnya sebagai vintf_fragment ke
+# /vendor/etc/vintf/manifest/, jadi menambahkannya ke DEVICE_MANIFEST_FILE
+# membuat IDms/default terdeklarasi dua kali dan check_vintf gagal.
 # NOTE: hardware/dolby/vendor.dolby.media.c2.xml sengaja tidak dipakai.
 # Store codec2 Dolby mendaftar sebagai IComponentStore/default1 tanpa IConfigurable,
 # dan libcodec2_client A17 meng-abort() system_server saat enumerasi
@@ -106,10 +109,14 @@ TARGET_USES_ION := true
 -include vendor/halcyon/config/BoardConfigReservedSize.mk
 
 ifeq (,$(filter true, $(WITHOUT_RESERVED_SIZE) $(WITH_GMS)))
+    # Vanilla: extra headroom (~1 GiB per GApps partition) so GApps/MicroG
+    # installers fit after flashing. vendor/odm untouched: GApps never go there.
     BOARD_PRODUCTIMAGE_EXTFS_INODE_COUNT := -1
-    BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE := 2415919104
-    BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 157286400
-    BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE := 157286400
+    BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT := -1
+    BOARD_SYSTEM_EXTIMAGE_EXTFS_INODE_COUNT := -1
+    BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE := 2306867200
+    BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 1153433600
+    BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE := 1048576000
 endif
 
 BOARD_FLASH_BLOCK_SIZE := 262144 # (BOARD_KERNEL_PAGESIZE * 64)

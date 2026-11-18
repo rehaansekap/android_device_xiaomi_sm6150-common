@@ -63,11 +63,8 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
 
 DEVICE_MANIFEST_FILE := $(COMMON_PATH)/configs/hidl/manifest.xml
 DEVICE_MANIFEST_FILE += \
-    hardware/qcom-caf/sm8150/media/conf_files/sm6150/c2_manifest.xml
-# NOTE: vendor.dolby.hardware.dms@2.0-service.xml tidak lagi di sini.
-# hardware/dolby/Android.bp sudah menginstalnya sebagai vintf_fragment ke
-# /vendor/etc/vintf/manifest/, jadi menambahkannya ke DEVICE_MANIFEST_FILE
-# membuat IDms/default terdeklarasi dua kali dan check_vintf gagal.
+    hardware/qcom-caf/sm8150/media/conf_files/sm6150/c2_manifest.xml \
+    hardware/dolby/vendor.dolby.hardware.dms@2.0-service.xml
 # NOTE: hardware/dolby/vendor.dolby.media.c2.xml sengaja tidak dipakai.
 # Store codec2 Dolby mendaftar sebagai IComponentStore/default1 tanpa IConfigurable,
 # dan libcodec2_client A17 meng-abort() system_server saat enumerasi
